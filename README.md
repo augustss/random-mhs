@@ -2,15 +2,10 @@
 
 ## Random Number Generation
 
-### Status
-
-| Language | Github Actions | Coveralls |
-|:--------:|:--------------:|:---------:|
-| ![GitHub top language](https://img.shields.io/github/languages/top/haskell/random.svg) | [![Build Status](https://github.com/haskell/random/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/haskell/random/actions/workflows/ci.yaml) | [![Coverage Status](https://coveralls.io/repos/github/haskell/random/badge.svg?branch=master)](https://coveralls.io/github/haskell/random?branch=master)
-
-|    Github Repo     | Hackage | Nightly | LTS |
-|:-------------------|:-------:|:-------:|:---:|
-|  [`random`](https://github.com/haskell/random)| [![Hackage](https://img.shields.io/hackage/v/random.svg)](https://hackage.haskell.org/package/random)| [![Nightly](https://www.stackage.org/package/random/badge/nightly)](https://www.stackage.org/nightly/package/random)| [![LTS](https://www.stackage.org/package/random/badge/lts)](https://www.stackage.org/lts/package/random)
+### MHS version
+This a fork of the `random` package to be able to compile it with MicroHs.
+The `random` package maintainers do not want to these changes.
+This package still works with GHC.
 
 ### Description
 
