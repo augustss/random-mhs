@@ -238,14 +238,15 @@ writeArray (MutableArray ma#) (I# i#) a = st_ (writeArray# ma# i# a)
 {-# INLINE writeArray #-}
 
 #else /* !defined(__MHS__) */
-import qualified Data.Array as A
 import Data.Array.Byte
 import Data.Bits
 import Data.ByteString(ByteString)
 import Data.ByteString.Short.Internal
-import qualified Data.STArray as SA
 import Data.Word
+import qualified Mhs.Arr as A
+import qualified Mhs.MutArr as SA
 import GHC.Exts(unsafeIOToST)
+import System.IO.Unsafe(unsafePerformIO)
 
 wordSizeInBits :: Int
 wordSizeInBits = _wordSize
@@ -280,23 +281,25 @@ shortByteStringToByteString = fromShort
 
 --------
 
-type Array a = A.Array Int a
-type MutableArray s a = SA.STArray s a
+type Array a = A.Arr a
+type MutableArray s a = SA.MutSTArr s a
 
 newMutableArray :: Int -> a -> ST s (MutableArray s a)
-newMutableArray = SA.newSTArray
+newMutableArray = SA.newMutSTArr
 
 freezeMutableArray :: MutableArray s a -> ST s (Array a)
-freezeMutableArray = SA.freezeSTArray
+freezeMutableArray a = A.copyArr <$> A.unsafeFreezeMutSTArr a
 
 sizeOfMutableArray :: MutableArray s a -> Int
-sizeOfMutableArray = SA.sizeSTArray
+sizeOfMutableArray (SA.MutSTArr a) = unsafePerformIO (SA.sizeMutIOArr a)
 
 readArray :: MutableArray s a -> Int -> ST s a
-readArray = SA.readSTArray
+readArray a i | i < 0 || i >= sizeOfMutableArray a = error "readArray"
+              | otherwise = SA.unsafeReadMutSTArr a i
 
 writeArray :: MutableArray s a -> Int -> a -> ST s ()
-writeArray = SA.writeSTArray
+writeArray a i x | i < 0 || i >= sizeOfMutableArray a = error "writeArray"
+                 | otherwise = SA.unsafeWriteMutSTArr a i x
 
 #endif /* !defined(__MHS__) */
 
