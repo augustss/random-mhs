@@ -241,7 +241,7 @@ writeArray (MutableArray ma#) (I# i#) a = st_ (writeArray# ma# i# a)
 import Data.Array.Byte
 import Data.Bits
 import Data.ByteString(ByteString)
-import Data.ByteString.Short.Internal
+import Data.ByteString.Short.Internal(ShortByteString, fromShort, toShort)
 import Data.Word
 import qualified Mhs.Arr as A
 import qualified Mhs.MutArr as SA
