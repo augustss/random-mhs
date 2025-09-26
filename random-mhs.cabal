@@ -1,12 +1,14 @@
 cabal-version:      >=1.10
 name:               random-mhs
-version:            1.3.2
+version:            1.3.2.1
 license:            BSD3
 license-file:       LICENSE
-maintainer:         core-libraries-committee@haskell.org
-bug-reports:        https://github.com/haskell/random/issues
+maintainer:         lennart@augustsson.net
+bug-reports:        https://github.com/augustss/random-mhs/issues
 synopsis:           Pseudo-random number generation
 description:
+    == This package is a fork of 'random' with changes to make it compile with MicroHs.
+    .
     This package provides basic pseudo-random number generation, including the
     ability to split random number generators.
     .
@@ -79,7 +81,7 @@ tested-with:         GHC == 8.0.2
 
 source-repository head
     type:     git
-    location: https://github.com/haskell/random.git
+    location: https://github.com/augustss/random-mhs.git
 
 
 library
@@ -106,7 +108,7 @@ library
         transformers >=0.4 && <0.7,
         splitmix >=0.1 && <0.2
     if impl(ghc < 9.4)
-      build-depends: data-array-byte
+      build-depends: data-array-byte <9.9
 
 test-suite legacy-test
     type:             exitcode-stdio-1.0
@@ -124,7 +126,7 @@ test-suite legacy-test
       -with-rtsopts=-M9M
       -Wno-deprecations
     build-depends:
-        base,
+        base >=4.9 && <5,
         containers >=0.5 && <0.8,
         random
 
@@ -141,7 +143,7 @@ test-suite spec
     default-language: Haskell2010
     ghc-options:      -Wall
     build-depends:
-        base,
+        base >=4.9 && <5,
         bytestring,
         random,
         smallcheck >=1.2 && <1.3,
@@ -162,7 +164,7 @@ test-suite spec-inspection
     other-modules:
         Spec.Inspection
     build-depends:
-        base,
+        base >=4.9 && <5,
         random,
         tasty >=1.0 && <1.6,
         tasty-inspection-testing
@@ -179,7 +181,7 @@ benchmark legacy-bench
         -Wall -O2 -threaded -rtsopts -with-rtsopts=-N -Wno-deprecations
 
     build-depends:
-        base,
+        base >=4.9 && <5,
         random,
         rdtsc,
         split >=0.2 && <0.3,
@@ -192,7 +194,7 @@ benchmark bench
     default-language: Haskell2010
     ghc-options:      -Wall -O2
     build-depends:
-        base,
+        base >=4.9 && <5,
         mtl,
         primitive,
         random,
