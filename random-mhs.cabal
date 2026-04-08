@@ -1,6 +1,6 @@
 cabal-version:      >=1.10
 name:               random-mhs
-version:            1.3.2.1
+version:            1.3.2.2
 license:            BSD3
 license-file:       LICENSE
 maintainer:         lennart@augustsson.net

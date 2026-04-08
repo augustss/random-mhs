@@ -55,6 +55,8 @@ import Data.Word
 #if !defined(__MHS__)
 import GHC.Exts (Proxy#, proxy#)
 import GHC.TypeLits (KnownNat, Nat, natVal', type (<=))
+#else /* !defined(__MHS__) */
+import Data.Proxy
 #endif /* !defined(__MHS__) */
 import System.Random.Internal
 import qualified System.Random.SplitMix as SM
